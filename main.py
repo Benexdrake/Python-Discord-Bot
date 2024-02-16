@@ -15,6 +15,7 @@ def main():
     loading(bot, 'tasks')
     loading(bot, 'events')
     loading(bot, 'slash_commands')
+    loading(bot, 'user_commands')
 
     load_dotenv()
     bot.run(os.getenv('TOKEN'))
@@ -27,6 +28,3 @@ def loading(bot, folder):
             bot.load_extension(f'{folder}.{filename[:-3]}')
 
 main()
-
-  
-  
