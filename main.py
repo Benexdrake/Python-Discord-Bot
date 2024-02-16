@@ -2,29 +2,30 @@ import discord
 import os
 from dotenv import load_dotenv
 
-def main():
-    intents = discord.Intents.default()
-    intents.message_content = True
-    intents.members = True
+class Bot(discord.Bot):
+    def __init__(self):
+        intents = discord.Intents.default()
+        intents.message_content = True
+        intents.members = True
+        status = discord.Status.dnd
+        activity = discord.Activity(type=discord.ActivityType.playing, name='sich am Sack')
+        super().__init__(intents=intents, debug_guilds=[998136328032112671], status=status, activity=activity)
 
-    status = discord.Status.dnd
-    activity = discord.Activity(type=discord.ActivityType.playing, name='sich am Sack')
+    def run(self):
+        self.loading('tasks')
+        self.loading('events')
+        self.loading('slash_commands')
+        self.loading('user_commands')
 
-    bot = discord.Bot(intents=intents, debug_guilds=[998136328032112671], status=status, activity=activity)
+        load_dotenv()
+        super().run(os.getenv('TOKEN'))
 
-    loading(bot, 'tasks')
-    loading(bot, 'events')
-    loading(bot, 'slash_commands')
-    loading(bot, 'user_commands')
+    def loading(self,folder):
+        for filename in os.listdir(f"{folder}"):
+            if filename.endswith('.py'):
+                print(f'Loading {folder}: {filename[:-3]}')
+                super().load_extension(f'{folder}.{filename[:-3]}')
 
-    load_dotenv()
-    bot.run(os.getenv('TOKEN'))
-    
 
-def loading(bot, folder):
-    for filename in os.listdir(f"{folder}"):
-        if filename.endswith('.py'):
-            print(f'Loading {folder}: {filename[:-3]}')
-            bot.load_extension(f'{folder}.{filename[:-3]}')
-
-main()
+bot = Bot()
+bot.run()
