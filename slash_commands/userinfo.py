@@ -4,10 +4,10 @@ from discord.commands import slash_command
 from discord.commands import Option
 
 class UserInfo(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot:discord.Bot):
         self.bot = bot
     @slash_command()
-    async def userinfo(self,ctx,user: Option(discord.Member, 'Gib einen User ein', default=None)):
+    async def userinfo(self,ctx:commands.Context,user: Option(discord.Member, 'Gib einen User ein', default=None)):
         if user is None:
             user = ctx.author
 
@@ -29,5 +29,5 @@ class UserInfo(commands.Cog):
         await ctx.respond(embed=embed)
 
 
-def setup(bot):
+def setup(bot:discord.Bot):
     bot.add_cog(UserInfo(bot))

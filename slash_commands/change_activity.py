@@ -3,10 +3,10 @@ from discord.ext import commands
 from discord.commands import slash_command, Option
 
 class ChangeActivity(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot:discord.Bot):
         self.bot = bot
     @slash_command()
-    async def activity(self,ctx, typ: Option(str, choices=["game", "stream"]), name: Option(str)):
+    async def activity(self,ctx:commands.Context, typ: Option(str, choices=["game", "stream"]), name: Option(str)):
         if typ == 'game':
             act = discord.Game(name=name)
         if typ == 'stream':
@@ -15,5 +15,5 @@ class ChangeActivity(commands.Cog):
         await ctx.respond('Status wurde geändert', ephemeral=True)
 
 
-def setup(bot):
+def setup(bot:discord.Bot):
     bot.add_cog(ChangeActivity(bot))

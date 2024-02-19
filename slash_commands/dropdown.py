@@ -10,25 +10,23 @@ options= [
 ]
 
 class Dropdown(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot:discord.Bot):
         self.bot=bot
 
     @slash_command()
-    async def create_dropdown1(self,ctx):
+    async def create_dropdown1(self,ctx:commands.Context):
         await ctx.respond("Wähle Programmiersprachen aus", view=TutorialView())
 
     @slash_command()
-    async def create_dropdown2(self,ctx):
+    async def create_dropdown2(self,ctx:commands.Context):
         select = TutorialSelect()
         view = discord.ui.View(timeout=None)
         view.add_item(select)
 
         await ctx.respond(view=view)
         
-def setup(bot):
+def setup(bot:discord.Bot):
     bot.add_cog(Dropdown(bot))
-
-
 
 
 class TutorialSelect(discord.ui.Select):
@@ -54,7 +52,7 @@ class TutorialView(discord.ui.View):
         custom_id='dropdowntest123'
     )
 
-    async def select_callback(self,select,interaction):
+    async def select_callback(self,select,interaction:discord.Interaction):
         s=''
         for auswahl in select.values:
             s += f'- {auswahl}\n'

@@ -5,11 +5,11 @@ from discord.commands import slash_command
 import asyncio
 
 class Wait(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot:discord.Bot):
         self.bot=bot
 
     @slash_command()
-    async def wait(self,ctx):
+    async def wait(self,ctx:commands.Context):
         await ctx.respond('Gib eine Zahl ein')
 
         def check(message):
@@ -22,5 +22,5 @@ class Wait(commands.Cog):
             return
         await answer.reply(f'Du hast die Zahl {answer.content} eingegeben')
         
-def setup(bot):
+def setup(bot:discord.Bot):
     bot.add_cog(Wait(bot))

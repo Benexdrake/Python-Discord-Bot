@@ -4,11 +4,11 @@ from discord.commands import slash_command
 from discord.ext.pages import Paginator, Page
 
 class PageTest(commands.Cog):
-    def __init__(self,bot):
+    def __init__(self,bot:discord.Bot):
         self.bot = bot
 
     @slash_command()
-    async def page(self,ctx):
+    async def page(self,ctx:commands.Context):
 
         pages = [
             Page(content='HALLO'),
@@ -22,7 +22,7 @@ class PageTest(commands.Cog):
         await paginator.respond(ctx.interaction, ephemeral=True)
 
     @slash_command()
-    async def memberlist(self,ctx):
+    async def memberlist(self,ctx:commands.Context):
         members = ctx.guild.members
         pages = []
         description = ''
@@ -39,5 +39,5 @@ class PageTest(commands.Cog):
         await paginator.respond(ctx.interaction, ephemeral=True)
 
 
-def setup(bot):
+def setup(bot:discord.Bot):
     bot.add_cog(PageTest(bot))

@@ -8,7 +8,9 @@ class Bot(discord.Bot):
         intents.message_content = True
         intents.members = True
         status = discord.Status.dnd
-        activity = discord.Activity(type=discord.ActivityType.playing, name='sich am Sack')
+        activity = discord.Activity(type=discord.ActivityType.playing, name='mit Python rum')
+        #activity = discord.CustomActivity(name='test')
+
         super().__init__(intents=intents, debug_guilds=[998136328032112671], status=status, activity=activity)
 
     def run(self):
@@ -20,7 +22,7 @@ class Bot(discord.Bot):
         load_dotenv()
         super().run(os.getenv('TOKEN'))
 
-    def loading(self,folder):
+    def loading(self,folder:str):
         for filename in os.listdir(f"{folder}"):
             if filename.endswith('.py'):
                 print(f'Loading {folder}: {filename[:-3]}')

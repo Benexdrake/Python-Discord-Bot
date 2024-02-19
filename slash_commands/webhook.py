@@ -8,7 +8,7 @@ import os
 from dotenv import load_dotenv
 
 class WebHook(commands.Cog):
-    def __init__(self,bot):
+    def __init__(self,bot:discord.Bot):
         self.bot = bot
 
     load_dotenv()

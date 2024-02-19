@@ -4,7 +4,7 @@ from discord.commands import slash_command
 from discord.ui.item import Item
 
 class Button(commands.Cog):
-    def __init__(self, bot):
+    def __init__(self, bot:discord.Bot):
         self.bot = bot
 
     @commands.Cog.listener()
@@ -12,24 +12,24 @@ class Button(commands.Cog):
         self.bot.add_view(TutorialView())
 
     @slash_command()
-    async def button1(self,ctx):
+    async def button1(self,ctx:commands.Context):
         await ctx.respond('Klick mich', view=TutorialView())
 
     @slash_command()
-    async def url_button(self,ctx):
+    async def url_button(self,ctx:commands.Context):
         button = discord.ui.Button(label='Ich bin ein Url Button',url='https://benrichter.me')
         view = discord.ui.View()
         view.add_item(button)
         await ctx.respond('Klick mich', view=view)
 
     @slash_command()
-    async def button2(self,ctx, label:discord.Option(str, 'name of the button')):
+    async def button2(self,ctx:commands.Context, label:discord.Option(str, 'name of the button')):
         button = TutorialButton(label)
         view = discord.ui.View()
         view.add_item(button)
         await ctx.respond('Klick mich', view=view)
 
-def setup(bot):
+def setup(bot:discord.Bot):
     bot.add_cog(Button(bot))
 
 class TutorialView(discord.ui.View):
