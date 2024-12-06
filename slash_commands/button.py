@@ -17,7 +17,7 @@ class Button(commands.Cog):
 
     @slash_command()
     async def url_button(self,ctx:commands.Context):
-        button = discord.ui.Button(label='Ich bin ein Url Button',url='https://benrichter.me')
+        button = discord.ui.Button(label='Ich bin ein Url Button',url='https://sssssssss.de')
         view = discord.ui.View()
         view.add_item(button)
         await ctx.respond('Klick mich', view=view)
